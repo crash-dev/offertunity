@@ -18,12 +18,11 @@
         android:text="@string/hello_world"
         android:textSize="30sp" />
 
-    <Button
+    <!--<Button
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/label"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="57dp"
         android:onClick="comenzarServicio"
         android:text="Iniciar Servicio" />
@@ -37,5 +36,15 @@
         android:layout_marginTop="22dp"
         android:onClick="detenerServicio"
         android:text="Detener Servicio" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:onClick="lanzarNotificacion"
+        android:text="Lanzar Notificacion" />-->
 
 </RelativeLayout>

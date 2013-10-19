@@ -3,11 +3,11 @@
     package="com.crash.dev.offertunity"
     android:versionCode="1"
     android:versionName="1.0" >
-            
+
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="18" />
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -17,11 +17,13 @@
     <uses-permission android:name="android.permission.BATTERY_STATS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-	<uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" /> 
-	<uses-permission android:name="android.permission.VIBRATE" /> 
-	
-	<uses-feature android:name="android.hardware.location" android:required="true"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -30,55 +32,80 @@
         android:theme="@style/Theme.Offertunittytheme" >
         <activity
             android:name="com.crash.dev.offertunity.MainActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <service
             android:name="com.qualcommlabs.usercontext.service.GimbalService"
             android:exported="false" >
             <intent-filter>
-            	<action android:name="com.crash.dev.offertunity.service.USER_CONTEXT_SERVICE" />
+                <action android:name="com.crash.dev.offertunity.service.USER_CONTEXT_SERVICE" />
             </intent-filter>
-		</service>
+        </service>
 
         <receiver
             android:name="com.qualcommlabs.usercontext.service.UserContextServiceStartStopReceiver"
             android:enabled="true" >
             <intent-filter>
-            	<action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
             <intent-filter>
-            	<action android:name="android.intent.action.ACTION_SHUTDOWN" />
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
             </intent-filter>
-		</receiver>
-          
-       	<service android:name="PlaceEventListenerService">
-        </service>
-        
-        <receiver 
-            android:name="PlaceEventBroadcastReceiver" 
-            android:enabled="true">
+        </receiver>
+
+        <service
+            android:name="com.crash.dev.offertunity.PlaceEventListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.crash.dev.offertunity.PLACE_EVENT_LISTENER_SERVICE" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
             <intent-filter>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.crash.dev.offertunity.PlaceEventBroadcastReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE" />
             </intent-filter>
+            -->
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+            </intent-filter>
         </receiver>
-          
+
         <service android:name="com.parse.PushService" />
-<receiver android:name="com.parse.ParseBroadcastReceiver">
-  <intent-filter>
-    <action android:name="android.intent.action.BOOT_COMPLETED" />
-    <action android:name="android.intent.action.USER_PRESENT" />
-  </intent-filter>
-</receiver>
+
+        <receiver android:name="com.parse.ParseBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.crash.dev.offertunity.NotificationReceiver"
+            android:label="@string/title_activity_notification_receiver"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>
