@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OfertasPorZonaActivity" 
+    xmlns:app="http://schemas.android.com/apk/res/com.crash.dev.offertunity"
+    android:background="@drawable/abs__ab_solid_light_holo">
+
+    <!-- <ListView
+        android:id="@+id/offersListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+    </ListView> -->
+    
+    <com.twotoasters.jazzylistview.JazzyListView
+        android:id="@+id/offersListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        app:effect="cards"
+        app:only_animate_new_items="false"
+        app:only_animate_fling="false"
+        app:max_velocity="0" />
+
+</RelativeLayout>

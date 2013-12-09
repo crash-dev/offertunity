@@ -5,5 +5,12 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">No mames!!!</string>
     <string name="title_activity_notification_receiver">NotificationReceiver</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_ofertas_por_zona">Ofertas de Zona</string>
+    <string name="parallax_description">Parallax ImageView</string>
+    <string name="cadena_vacia"></string>
+    <string name="title_activity_detalles_de_oferta">DetallesDeOfertaActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_only_testing">OnlyTestingActivity</string>
 
 </resources>

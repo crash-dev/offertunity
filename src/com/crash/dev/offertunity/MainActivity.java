@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
 import com.qualcommlabs.usercontext.Callback;
 import com.qualcommlabs.usercontext.ContextCoreConnector;
@@ -46,7 +48,7 @@ public class MainActivity extends SherlockActivity {
                 if(event.getEventType() == "AT")
                 	tv.setText("Has llegado a: "+ event.getPlace().getPlaceName());
                 else
-                	tv.setText("Has salidp de: "+ event.getPlace().getPlaceName());
+                	tv.setText("Has salido de: "+ event.getPlace().getPlaceName());
                 
             }
         };

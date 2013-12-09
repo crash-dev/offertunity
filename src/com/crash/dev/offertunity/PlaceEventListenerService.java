@@ -96,7 +96,8 @@ public class PlaceEventListenerService extends Service implements PlaceEventList
         else
         	Toast.makeText(getApplicationContext(), "(SERVICE) Has salido de: "+ event.getPlace().getPlaceName(), Toast.LENGTH_LONG).show();*/
         
-        Intent intent = new Intent(this, NotificationReceiver.class);
+        Intent intent = new Intent(this, OfertasPorZonaActivity.class);
+        intent.putExtra("nombreDeZona", ""+event.getPlace().getPlaceName());
 		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 		
 		NotificationCompat.Builder notification = new NotificationCompat.Builder(this);
@@ -107,9 +108,9 @@ public class PlaceEventListenerService extends Service implements PlaceEventList
 		notification.setAutoCancel(true);
 		
 		if(event.getEventType() == "AT")
-			notification.setContentText("Bienvenido a "+event.getPlace().getId()+", ÁEntraste en zona de ofertas! ");
-		else
-			notification.setContentText("Hasta luego, haz salido de zona de ofertas");
+			notification.setContentText("Bienvenido a "+event.getPlace().getPlaceName()+", ÁEntraste en zona de ofertas! ");
+		/*else
+			notification.setContentText("Hasta luego, haz salido de zona de ofertas");*/
 		
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		notificationManager.notify(1234, notification.build() );
