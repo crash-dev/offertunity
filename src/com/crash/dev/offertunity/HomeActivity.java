@@ -153,34 +153,4 @@ public class HomeActivity extends SherlockFragmentActivity implements TabListene
 		//Log.d("QQQQ","onTabReselected at position "+tab.getPosition()+" name "+tab.getText());
 	}
 	
-	/*class HomePagerAdapter extends FragmentPagerAdapter{
-
-		public HomePagerAdapter(FragmentManager fm) {
-				super(fm);
-		}
-	
-		@Override
-		public Fragment getItem(int position) {
-			
-			Fragment fragment = null;
-			
-			if(position == 0){
-				fragment = new OfertasRelevantesFragment();
-			}
-			if(position == 1){
-				fragment = new OfertasCercanasFragment();
-			}
-			if(position == 2){
-				fragment = new ZonasDeOfertasFragment();
-			}
-			return fragment;
-		}
-	
-		@Override
-		public int getCount() {
-			return 3;
-		}
-	
-	}*/
-	
 }

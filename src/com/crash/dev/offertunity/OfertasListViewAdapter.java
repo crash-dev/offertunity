@@ -31,6 +31,17 @@ public class OfertasListViewAdapter extends ParseQueryAdapter<Oferta>{
             }
         });
 	}
+	
+	public OfertasListViewAdapter(Context context, final String nombreDeZona){
+		
+		super(context, new ParseQueryAdapter.QueryFactory<Oferta>() {
+            public ParseQuery<Oferta> create() {
+                ParseQuery query = new ParseQuery("Oferta");
+                query.whereEqualTo("zona", nombreDeZona);  
+                return query;
+            }
+        });
+	}
 
 	@Override
 	public View getItemView(Oferta oferta, View v, ViewGroup parent) {
@@ -59,6 +70,7 @@ public class OfertasListViewAdapter extends ParseQueryAdapter<Oferta>{
 		
 		TextView titulo = (TextView) v.findViewById(R.id.titulo);
 		titulo.setText(oferta.getTitulo());
+		v.setTag(oferta.getObjectId());
 		
 		return v;
 	}

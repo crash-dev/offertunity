@@ -12,5 +12,7 @@
     <string name="title_activity_detalles_de_oferta">DetallesDeOfertaActivity</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_only_testing">OnlyTestingActivity</string>
+    <string name="take_offertunity">Aprovechar Offerta</string>
+    
 
 </resources>

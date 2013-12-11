@@ -1,6 +1,7 @@
 package com.crash.dev.offertunity;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -48,6 +49,7 @@ public class ZonasDeOfertasListViewAdapter extends ParseQueryAdapter<ZonaDeOfert
 		
 		TextView titulo = (TextView) v.findViewById(R.id.titulo);
 		titulo.setText(zona.getNombre());
+		v.setTag(zona.getNombre());
 		
 		return v;
 	}

@@ -28,15 +28,17 @@ public class ZonasDeOfertasFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
+		super.onCreate(savedInstanceState);
+		
 		View view = inflater.inflate(R.layout.fragment_zonas_de_ofertas, container, false);
 		zonasListView =  (JazzyListView) view.findViewById(R.id.zonasListView);
 		zonasListView.setAdapter(new ZonasDeOfertasListViewAdapter(getActivity()));
 		zonasListView.setOnItemClickListener(new OnItemClickListener() {
 			
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent(getActivity(), OfertasPorZonaActivity.class);
+				//Toast.makeText(getActivity(), ""+view.getTag(), Toast.LENGTH_SHORT).show();
+				intent.putExtra("nombreDeZona", ""+view.getTag());
 				startActivity(intent);
 				
 			}
@@ -46,8 +48,7 @@ public class ZonasDeOfertasFragment extends Fragment {
         	mCurrentTransitionEffect = savedInstanceState.getInt("transition_effect", JazzyHelper.CARDS);
         	setupJazziness(mCurrentTransitionEffect);
         }
-		
-		//return inflater.inflate(R.layout.fragment_zonas_de_ofertas, container, false);
+	
 		return view;
 	}
 	

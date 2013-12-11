@@ -19,9 +19,9 @@ public class OfertasCercanasFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
 		return inflater.inflate(R.layout.fragment_ofertas_cercanas, container,
 				false);
 	}
