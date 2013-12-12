@@ -1,5 +1,8 @@
 package com.crash.dev.offertunity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
@@ -13,9 +16,20 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -114,10 +128,63 @@ public class OfertasCercanasFragment extends Fragment
                 this);
 		
 		if (mLocationClient != null && mLocationClient.isConnected()) {
-			map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(19.4326058056025, -99.13325399999997), 11.0f));
+			
+			map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLocationClient.getLastLocation().getLatitude(), mLocationClient.getLastLocation().getLongitude()), 16.0f));
             String msg = "Location = " + mLocationClient.getLastLocation();
-            Toast.makeText(getActivity().getApplicationContext(), "Loc: "+mLocationClient.getLastLocation().getLatitude()+
-            		","+mLocationClient.getLastLocation().getLongitude(), Toast.LENGTH_LONG).show();
+           // Toast.makeText(getActivity().getApplicationContext(), "Loc: "+mLocationClient.getLastLocation().getLatitude()+
+            //		","+mLocationClient.getLastLocation().getLongitude(), Toast.LENGTH_LONG).show();
+            // ***** con toast, se puede saber momento en q ejecuta consulta
+            
+            //hace consulta marcadores
+            ParseGeoPoint userLocation = new ParseGeoPoint(mLocationClient.getLastLocation().getLatitude(), mLocationClient.getLastLocation().getLongitude()); //ubicacion actual del usuario
+    		ParseQuery<ParseObject> query = ParseQuery.getQuery("Establecimiento"); //inicializa query con el nombre de la clase a consultar en parse
+    		query.whereNear("ubicacion", userLocation); //query para encontrar los puntos mas cercanos a la localizacion actual
+    		query.setLimit(10); //con un maximo de 10
+    		query.orderByAscending("ubicacion"); 
+    		
+    		query.findInBackground(new FindCallback<ParseObject>() {
+    			
+    			@Override
+    			public void done(List<ParseObject> list, ParseException error) {
+    				// TODO Auto-generated method stub
+    				String res="";
+    				MarkerOptions mo = new MarkerOptions();
+    				Drawable img = null;
+    				byte[] data;
+    				//Log.d("ParseGEO", "ENTRO");
+    				if(error==null){
+    					for(int i=0;i<list.size();i++){
+    						//res = res+"--"+list.get(i).getString("PFFF");
+    						Log.d("ParseGEO", "**"+list.get(i).getString("nombre")+" loc: "+((ParseGeoPoint)list.get(i).get("ubicacion")).getLatitude()+".."+list.get(i).get("img"));
+    						mo.position(new LatLng(((ParseGeoPoint)list.get(i).get("ubicacion")).getLatitude(), ((ParseGeoPoint)list.get(i).get("ubicacion")).getLongitude()));
+    						mo.title(list.get(i).getString("nombre"));
+    						//obtiene imagen
+    						
+    						  try {
+    						   data = ((ParseFile)list.get(i).get("img")).getData();
+    						   Bitmap   bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+    						   mo.icon(BitmapDescriptorFactory.fromBitmap(bmp));
+
+    						  } catch (ParseException e) {
+    						   // TODO Auto-generated catch block
+    						   //e.printStackTrace();
+    							  Log.d("PFFF", "No agrego imagen");
+    						  }
+    						
+    						
+    						map.addMarker(mo);
+    					}
+    				}
+    				else{
+    					Log.d("ParseGEO", "No hubo resultado");
+    				}
+    				
+    				//tv.setText(""+res);
+    			}
+    		});
+            
+            
+            
         }
 		
 	}
