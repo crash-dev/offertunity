@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:adjustViewBounds="true"
-    android:scaleType="centerCrop"
-    android:src="@drawable/ny" >
+    android:scaleType="centerCrop" >
 </com.parse.ParseImageView>
+<!--<com.parse.ParseImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/headerImageView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:adjustViewBounds="true" >
+</com.parse.ParseImageView>-->

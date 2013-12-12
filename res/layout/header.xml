@@ -6,4 +6,4 @@
     android:adjustViewBounds="true"
     android:scaleType="centerCrop"
     android:contentDescription="@string/parallax_description"
-    android:src="@drawable/ny" />
+    android:src="@drawable/df" />

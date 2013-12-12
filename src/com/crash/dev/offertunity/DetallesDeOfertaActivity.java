@@ -11,13 +11,14 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 
 public class DetallesDeOfertaActivity extends SherlockActivity {
 	
 	String idDeOferta;
-	Oferta oferta;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,32 @@ public class DetallesDeOfertaActivity extends SherlockActivity {
 		}
 		
 		this.setTitle("Detalles de Offerta");
+		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Oferta");
+		query.getInBackground(idDeOferta, new GetCallback<ParseObject>() {
+			
+			@Override
+			public void done(ParseObject oferta, ParseException e) {
+				if (e != null) {
+					Log.i("TORZON de Oferta", ""+e);
+			    } else {
+			        Oferta currentOferta = (Oferta) oferta;
+			        setTitle(currentOferta.getTitulo());
+			        ParseImageView imagen = (ParseImageView) findViewById(R.id.imagen);
+			        ParseFile imagenDeZona = currentOferta.getParseFile("imagen");
+			        
+			        if (imagenDeZona != null) {
+				        imagen.setParseFile(imagenDeZona);
+				        imagen.loadInBackground();
+				    }
+			        
+			        TextView titulo = (TextView) findViewById(R.id.titulo);
+			        titulo.setText(currentOferta.getTitulo());
+			        TextView descripcion = (TextView) findViewById(R.id.descripcion);
+			        descripcion.setText(currentOferta.getDescripcion());
+			    }
+			}
+		});
 	}
 
 	@Override
@@ -38,38 +65,4 @@ public class DetallesDeOfertaActivity extends SherlockActivity {
 		return true;
 	}
 	
-	/*public void getHeaderImage(String idDeOferta){
-	
-		final ParseImageView imagen = (ParseImageView) findViewById(R.id.imagen);
-		
-		ParseQuery<ParseObject> query = ParseQuery.getQuery("Oferta");
-		query.getInBackground(idDeOferta, new GetCallback<ParseObject>() {
-			@Override
-			public void done(ParseObject oferta, ParseException e) {
-				// TODO Auto-generated method stub
-				ParseFile imagenDeOferta = oferta.getParseFile("imagen");
-
-				if (imagenDeOferta != null) {
-			        imagen.setParseFile(imagenDeOferta);
-			        imagen.loadInBackground();
-			    }
-			}
-		});
-		
-	}*/
-	
-	/*public Oferta getOferta(String idDeOferta) {
-		
-		
-		ParseQuery<ParseObject> query = ParseQuery.getQuery("Oferta");
-		query.getInBackground(idDeOferta, new GetCallback<ParseObject>() {
-			@Override
-			public void done(ParseObject ofertaResult, ParseException e) {
-				
-			}
-		});
-		
-		return oferta;
-	}*/
-
 }

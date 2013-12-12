@@ -6,10 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.parse.GetDataCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseQuery.CachePolicy;
 import com.parse.ParseQueryAdapter;
 
 public class ZonasDeOfertasListViewAdapter extends ParseQueryAdapter<ZonaDeOfertas>{
@@ -22,6 +25,7 @@ public class ZonasDeOfertasListViewAdapter extends ParseQueryAdapter<ZonaDeOfert
                 // Here we can configure a ParseQuery to display
                 // only top-rated meals.
                 ParseQuery query = new ParseQuery("ZonaDeOfertas");
+                query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
                 query.whereExists("nombre");  
                 //query.whereContainedIn("rating", Arrays.asList("5", "4"));
                 //query.orderByDescending("rating");
@@ -44,12 +48,17 @@ public class ZonasDeOfertasListViewAdapter extends ParseQueryAdapter<ZonaDeOfert
 		
 		if (imagenDeZona != null) {
 	        imagen.setParseFile(imagenDeZona);
-	        imagen.loadInBackground();
+	        imagen.loadInBackground(new GetDataCallback() {
+				@Override
+				public void done(byte[] data, ParseException e) {
+					// nothing to do
+				}
+			});
 	    }
 		
 		TextView titulo = (TextView) v.findViewById(R.id.titulo);
 		titulo.setText(zona.getNombre());
-		v.setTag(zona.getNombre());
+		v.setTag(zona.getObjectId());
 		
 		return v;
 	}

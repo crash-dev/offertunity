@@ -13,6 +13,7 @@ import com.parse.ParseImageView;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseQuery.CachePolicy;
 
 public class OfertasListViewAdapter extends ParseQueryAdapter<Oferta>{
 
@@ -24,6 +25,7 @@ public class OfertasListViewAdapter extends ParseQueryAdapter<Oferta>{
                 // Here we can configure a ParseQuery to display
                 // only top-rated meals.
                 ParseQuery query = new ParseQuery("Oferta");
+                query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
                 query.whereEqualTo("zona", "La Condesa");  
                 //query.whereContainedIn("rating", Arrays.asList("5", "4"));
                 //query.orderByDescending("rating");
@@ -70,6 +72,8 @@ public class OfertasListViewAdapter extends ParseQueryAdapter<Oferta>{
 		
 		TextView titulo = (TextView) v.findViewById(R.id.titulo);
 		titulo.setText(oferta.getTitulo());
+		TextView descripcion = (TextView) v.findViewById(R.id.donde);
+		descripcion.setText(oferta.getDescripcion());
 		v.setTag(oferta.getObjectId());
 		
 		return v;

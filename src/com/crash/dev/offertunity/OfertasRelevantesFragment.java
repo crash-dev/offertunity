@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 public class OfertasRelevantesFragment extends Fragment {
 	
 	private JazzyListView ofertasRelevantesListView;
-    private int mCurrentTransitionEffect = JazzyHelper.CARDS;
+    //private int mCurrentTransitionEffect = JazzyHelper.CARDS;
 
 	public OfertasRelevantesFragment() {
 		// Required empty public constructor
@@ -36,22 +36,22 @@ public class OfertasRelevantesFragment extends Fragment {
 		
 		View view = inflater.inflate(R.layout.fragment_ofertas_relevantes, container, false);
 		ofertasRelevantesListView = (JazzyListView) view.findViewById(R.id.ofertasRelevantesListView);
-		View header = getActivity().getLayoutInflater().inflate(R.layout.parse_imageview_header, null);
+		View header = getActivity().getLayoutInflater().inflate(R.layout.header, null);
 		ofertasRelevantesListView.addHeaderView(header);
 		ofertasRelevantesListView.setAdapter(new OfertasListViewAdapter(getActivity()));
 		
-		if(savedInstanceState != null){
+		/*if(savedInstanceState != null){
         	mCurrentTransitionEffect = savedInstanceState.getInt("transition_effect", JazzyHelper.CARDS);
         	setupJazziness(mCurrentTransitionEffect);
-        }
+        }*/
 		
 		return view;
 	}
 	
-	private void setupJazziness(int effect) {
+	/*private void setupJazziness(int effect) {
         mCurrentTransitionEffect = effect;
         ofertasRelevantesListView.setTransitionEffect(mCurrentTransitionEffect);
-    }
+    }*/
 
 	/*private View getHeaderView(){
 		

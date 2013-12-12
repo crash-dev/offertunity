@@ -11,10 +11,10 @@
         android:id="@+id/contenedor"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:background="@color/white" >
         
-        <com.parse.ParseImageView
+        <!--<com.parse.ParseImageView
 	        android:id="@+id/imagen"
 	        android:layout_width="100dp"
 	        android:layout_height="100dp"
@@ -33,7 +33,33 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/abs__background_holo_dark" />
 
-        </LinearLayout>
+        </LinearLayout>-->
+        
+        <com.parse.ParseImageView
+	        android:id="@+id/imagen"
+	        android:layout_width="match_parent"
+	        android:layout_height="125dp"
+	        android:scaleType="centerCrop" />
+        
+        <TextView
+                android:id="@+id/titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cadena_vacia"
+                android:maxLength="30"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/abs__background_holo_dark" />
+        
+        <TextView
+                android:id="@+id/donde"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cadena_vacia"
+                android:maxLength="30"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/abs__background_holo_dark" />
         
     </LinearLayout>
 

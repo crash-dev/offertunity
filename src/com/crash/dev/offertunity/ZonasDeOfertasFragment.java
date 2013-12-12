@@ -20,7 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class ZonasDeOfertasFragment extends Fragment {
 	
 	private JazzyListView zonasListView;
-    private int mCurrentTransitionEffect = JazzyHelper.CARDS;
+    //private int mCurrentTransitionEffect = JazzyHelper.CARDS;
 
 	public ZonasDeOfertasFragment() {
 		// Required empty public constructor
@@ -37,24 +37,23 @@ public class ZonasDeOfertasFragment extends Fragment {
 			
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent(getActivity(), OfertasPorZonaActivity.class);
-				//Toast.makeText(getActivity(), ""+view.getTag(), Toast.LENGTH_SHORT).show();
-				intent.putExtra("nombreDeZona", ""+view.getTag());
+				intent.putExtra("idDeZona", ""+view.getTag());
 				startActivity(intent);
 				
 			}
 		});
 		
-		if(savedInstanceState != null){
+		/*if(savedInstanceState != null){
         	mCurrentTransitionEffect = savedInstanceState.getInt("transition_effect", JazzyHelper.CARDS);
         	setupJazziness(mCurrentTransitionEffect);
-        }
+        }*/
 	
 		return view;
 	}
 	
-	private void setupJazziness(int effect) {
+	/*private void setupJazziness(int effect) {
         mCurrentTransitionEffect = effect;
         zonasListView.setTransitionEffect(mCurrentTransitionEffect);
-    }
+    }*/
 
 }

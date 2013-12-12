@@ -10,15 +10,24 @@ import java.util.HashMap;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.GetDataCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseImageView;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseQuery.CachePolicy;
 import com.twotoasters.jazzylistview.JazzyHelper;
 import com.twotoasters.jazzylistview.JazzyListView;
 
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -32,7 +41,8 @@ public class OfertasPorZonaActivity extends SherlockActivity {
 
 	private JazzyListView offersListView;
     private int mCurrentTransitionEffect = JazzyHelper.CARDS;
-    String nombreDeZona;
+    String idDeZona;
+    //ZonaDeOfertas currentZona;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +51,14 @@ public class OfertasPorZonaActivity extends SherlockActivity {
 		
 		Bundle extras = getIntent().getExtras();
 		if(extras != null){
-			nombreDeZona = extras.getString("nombreDeZona");
-			this.setTitle(nombreDeZona);
+			idDeZona = extras.getString("idDeZona");
+			Log.e("idDeZona", idDeZona);
+			//this.setTitle(idDeZona);
+			//getZonaDeOfertasById(idDeZona);
 		}
 		
 		offersListView = (JazzyListView) findViewById(R.id.offersListView);
-		View header = getLayoutInflater().inflate(R.layout.header, null);
+		View header = getLayoutInflater().inflate(R.layout.parse_imageview_header, null);
 		offersListView.addHeaderView(header);
 		offersListView.setAdapter(new OfertasListViewAdapter(this));
 		//offersListView.setAdapter(new OfertasListViewAdapter(this, nombreDeZona));
@@ -57,6 +69,37 @@ public class OfertasPorZonaActivity extends SherlockActivity {
 				Intent intent = new Intent(getApplicationContext(), DetallesDeOfertaActivity.class);
 				intent.putExtra("idDeOferta", ""+view.getTag());
 				startActivity(intent);
+			}
+		});
+		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("ZonaDeOfertas");
+		query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+		query.getInBackground(idDeZona, new GetCallback<ParseObject>() {
+			
+			@Override
+			public void done(ParseObject zona, ParseException e) {
+				if (e != null) {
+			        // There was an error
+					Log.i("TORZON de Zona", ""+e);
+			    } else {
+			        ZonaDeOfertas currentZona = (ZonaDeOfertas) zona;
+			        setTitle(currentZona.getNombre());
+			        ParseImageView imagen = (ParseImageView) findViewById(R.id.headerImageView);
+			        ParseFile imagenDeZona = currentZona.getParseFile("imagen");
+			        
+			        if (imagenDeZona != null) {
+				        imagen.setParseFile(imagenDeZona);
+				        /*imagen.loadInBackground(new GetDataCallback() {
+							@Override
+							public void done(byte[] arg0, ParseException arg1) {
+								// TODO Auto-generated method stub
+							}
+				        });*/
+				        imagen.loadInBackground();
+				    }
+			        
+			        //Log.i("SIN TORZON", ""+currentZona.getNombre());
+			    }
 			}
 		});
         
@@ -82,4 +125,34 @@ public class OfertasPorZonaActivity extends SherlockActivity {
         mCurrentTransitionEffect = effect;
         offersListView.setTransitionEffect(mCurrentTransitionEffect);
     }
+	
+	/*private void getZonaDeOfertasById(String idDeZona){
+		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("ZonaDeOfertas");
+		query.getInBackground(idDeZona, new GetCallback<ParseObject>() {
+			
+			@Override
+			public void done(ParseObject zona, ParseException e) {
+				if (e != null) {
+			        // There was an error
+					Log.i("TORZON", ""+e);
+			    } else {
+			        ZonaDeOfertas currentZona = (ZonaDeOfertas) zona;
+			        setTitle(currentZona.getNombre());
+			        ParseImageView imagen = (ParseImageView) findViewById(R.id.headerImageView);
+			        ParseFile imagenDeZona = currentZona.getParseFile("imagen");
+			        
+			        if (imagenDeZona != null) {
+				        imagen.setParseFile(imagenDeZona);
+				        imagen.loadInBackground();
+				    }
+			        
+			        //Log.i("SIN TORZON", ""+currentZona.getNombre());
+			    }
+			}
+		});
+		
+	}*/
+	
+
 }
