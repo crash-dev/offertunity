@@ -128,10 +128,14 @@
         <activity
             android:name="com.crash.dev.offertunity.DetallesDeOfertaActivity"
             android:label="@string/title_activity_detalles_de_oferta" >
+            android:label="@string/title_activity_detalles_de_oferta"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.crash.dev.offertunity.OnlyTestingActivity"
             android:label="@string/title_activity_only_testing" >
+            android:label="@string/title_activity_only_testing"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

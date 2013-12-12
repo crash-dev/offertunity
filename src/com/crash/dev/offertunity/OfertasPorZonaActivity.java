@@ -40,7 +40,7 @@ import android.widget.Toast;
 public class OfertasPorZonaActivity extends SherlockActivity {
 
 	private JazzyListView offersListView;
-    private int mCurrentTransitionEffect = JazzyHelper.CARDS;
+    //private int mCurrentTransitionEffect = JazzyHelper.CARDS;
     String idDeZona;
     //ZonaDeOfertas currentZona;
 	
@@ -48,6 +48,7 @@ public class OfertasPorZonaActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ofertas_por_zona);
+		View header = getLayoutInflater().inflate(R.layout.parse_imageview_header, null);
 		
 		Bundle extras = getIntent().getExtras();
 		if(extras != null){
@@ -57,8 +58,30 @@ public class OfertasPorZonaActivity extends SherlockActivity {
 			//getZonaDeOfertasById(idDeZona);
 		}
 		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("ZonaDeOfertas");
+		query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
+		query.getInBackground(idDeZona, new GetCallback<ParseObject>() {
+			
+			@Override
+			public void done(ParseObject zona, ParseException e) {
+				if (e != null) {
+					Log.i("Error de Zona", ""+e);
+			    } else {
+			        ZonaDeOfertas currentZona = (ZonaDeOfertas) zona;
+			        setTitle(currentZona.getNombre());
+			        ParseImageView imagen = (ParseImageView) findViewById(R.id.headerImageView);
+			        ParseFile imagenDeZona = currentZona.getParseFile("imagen");
+			        
+			        if (imagenDeZona != null) {
+				        imagen.setParseFile(imagenDeZona);
+				        imagen.loadInBackground();
+				    }
+
+			    }
+			}
+		});
+		
 		offersListView = (JazzyListView) findViewById(R.id.offersListView);
-		View header = getLayoutInflater().inflate(R.layout.parse_imageview_header, null);
 		offersListView.addHeaderView(header);
 		offersListView.setAdapter(new OfertasListViewAdapter(this));
 		//offersListView.setAdapter(new OfertasListViewAdapter(this, nombreDeZona));
@@ -71,41 +94,10 @@ public class OfertasPorZonaActivity extends SherlockActivity {
 				startActivity(intent);
 			}
 		});
-		
-		ParseQuery<ParseObject> query = ParseQuery.getQuery("ZonaDeOfertas");
-		query.setCachePolicy(CachePolicy.CACHE_THEN_NETWORK);
-		query.getInBackground(idDeZona, new GetCallback<ParseObject>() {
-			
-			@Override
-			public void done(ParseObject zona, ParseException e) {
-				if (e != null) {
-			        // There was an error
-					Log.i("TORZON de Zona", ""+e);
-			    } else {
-			        ZonaDeOfertas currentZona = (ZonaDeOfertas) zona;
-			        setTitle(currentZona.getNombre());
-			        ParseImageView imagen = (ParseImageView) findViewById(R.id.headerImageView);
-			        ParseFile imagenDeZona = currentZona.getParseFile("imagen");
-			        
-			        if (imagenDeZona != null) {
-				        imagen.setParseFile(imagenDeZona);
-				        /*imagen.loadInBackground(new GetDataCallback() {
-							@Override
-							public void done(byte[] arg0, ParseException arg1) {
-								// TODO Auto-generated method stub
-							}
-				        });*/
-				        imagen.loadInBackground();
-				    }
-			        
-			        //Log.i("SIN TORZON", ""+currentZona.getNombre());
-			    }
-			}
-		});
         
         if(savedInstanceState != null){
-        	mCurrentTransitionEffect = savedInstanceState.getInt("transition_effect", JazzyHelper.CARDS);
-        	setupJazziness(mCurrentTransitionEffect);
+        	//mCurrentTransitionEffect = savedInstanceState.getInt("transition_effect", JazzyHelper.CARDS);
+        	//setupJazziness(mCurrentTransitionEffect);
         }
 		
 	}
@@ -121,38 +113,9 @@ public class OfertasPorZonaActivity extends SherlockActivity {
 		return true;
 	}
 	
-	private void setupJazziness(int effect) {
+	/*private void setupJazziness(int effect) {
         mCurrentTransitionEffect = effect;
         offersListView.setTransitionEffect(mCurrentTransitionEffect);
-    }
+    }*/
 	
-	/*private void getZonaDeOfertasById(String idDeZona){
-		
-		ParseQuery<ParseObject> query = ParseQuery.getQuery("ZonaDeOfertas");
-		query.getInBackground(idDeZona, new GetCallback<ParseObject>() {
-			
-			@Override
-			public void done(ParseObject zona, ParseException e) {
-				if (e != null) {
-			        // There was an error
-					Log.i("TORZON", ""+e);
-			    } else {
-			        ZonaDeOfertas currentZona = (ZonaDeOfertas) zona;
-			        setTitle(currentZona.getNombre());
-			        ParseImageView imagen = (ParseImageView) findViewById(R.id.headerImageView);
-			        ParseFile imagenDeZona = currentZona.getParseFile("imagen");
-			        
-			        if (imagenDeZona != null) {
-				        imagen.setParseFile(imagenDeZona);
-				        imagen.loadInBackground();
-				    }
-			        
-			        //Log.i("SIN TORZON", ""+currentZona.getNombre());
-			    }
-			}
-		});
-		
-	}*/
-	
-
 }

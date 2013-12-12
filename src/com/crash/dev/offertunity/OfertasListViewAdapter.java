@@ -59,12 +59,7 @@ public class OfertasListViewAdapter extends ParseQueryAdapter<Oferta>{
 		
 		if (imagenDeOferta != null) {
 	        imagen.setParseFile(imagenDeOferta);
-	        imagen.loadInBackground(new GetDataCallback() {
-				@Override
-				public void done(byte[] arg0, ParseException arg1) {
-					// TODO Auto-generated method stub
-				}
-	        });
+	        imagen.loadInBackground();
 	    }
 		
 		//ParseImageView imagen = (ParseImageView) v.findViewById(R.id.imagen);

@@ -31,7 +31,7 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.PushService;
 
-public class MainActivity extends SherlockActivity {
+public class TestGimbalServicesActivity extends SherlockActivity {
 
 	private TextView tv;
 	

@@ -43,10 +43,10 @@ public class ZonasDeOfertasFragment extends Fragment {
 			}
 		});
 		
-		/*if(savedInstanceState != null){
-        	mCurrentTransitionEffect = savedInstanceState.getInt("transition_effect", JazzyHelper.CARDS);
-        	setupJazziness(mCurrentTransitionEffect);
-        }*/
+		if(savedInstanceState != null){
+        	//mCurrentTransitionEffect = savedInstanceState.getInt("transition_effect", JazzyHelper.CARDS);
+        	//setupJazziness(mCurrentTransitionEffect);
+        }
 	
 		return view;
 	}

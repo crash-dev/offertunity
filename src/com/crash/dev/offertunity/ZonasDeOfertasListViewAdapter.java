@@ -48,12 +48,7 @@ public class ZonasDeOfertasListViewAdapter extends ParseQueryAdapter<ZonaDeOfert
 		
 		if (imagenDeZona != null) {
 	        imagen.setParseFile(imagenDeZona);
-	        imagen.loadInBackground(new GetDataCallback() {
-				@Override
-				public void done(byte[] data, ParseException e) {
-					// nothing to do
-				}
-			});
+	        imagen.loadInBackground();
 	    }
 		
 		TextView titulo = (TextView) v.findViewById(R.id.titulo);
