@@ -1,6 +1,7 @@
 package com.crash.dev.offertunity;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,19 @@ public class ZonasDeOfertasListViewAdapter extends ParseQueryAdapter<ZonaDeOfert
 		
 		ParseImageView imagen = (ParseImageView) v.findViewById(R.id.imagen);
 		ParseFile imagenDeZona = zona.getImagen();
+		
+		/*Codigo para generar muestras de la imagenes y no agotar memoria*/
+		
+		/*BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inJustDecodeBounds = true;
+		try {
+			BitmapFactory.decodeByteArray(imagenDeZona.getData(), 0, imagenDeZona.getData().length, options);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}*/
+		
+		
+		
 		
 		if (imagenDeZona != null) {
 	        imagen.setParseFile(imagenDeZona);
