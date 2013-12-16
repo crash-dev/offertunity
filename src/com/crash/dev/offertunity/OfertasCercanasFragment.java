@@ -127,9 +127,15 @@ public class OfertasCercanasFragment extends Fragment
                 REQUEST,
                 this);
 		
-		if (mLocationClient != null && mLocationClient.isConnected()) {
+		if (mLocationClient.getLastLocation() != null && mLocationClient.isConnected()) {
 			
-			map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLocationClient.getLastLocation().getLatitude(), mLocationClient.getLastLocation().getLongitude()), 16.0f));
+			
+			map.animateCamera(
+					CameraUpdateFactory.newLatLngZoom(
+							new LatLng(
+									mLocationClient.getLastLocation().getLatitude(), 
+									mLocationClient.getLastLocation().getLongitude()),
+							16.0f));
             String msg = "Location = " + mLocationClient.getLastLocation();
            // Toast.makeText(getActivity().getApplicationContext(), "Loc: "+mLocationClient.getLastLocation().getLatitude()+
             //		","+mLocationClient.getLastLocation().getLongitude(), Toast.LENGTH_LONG).show();
@@ -168,7 +174,7 @@ public class OfertasCercanasFragment extends Fragment
     						  } catch (ParseException e) {
     						   // TODO Auto-generated catch block
     						   //e.printStackTrace();
-    							  Log.d("PFFF", "No agrego imagen");
+    							  Log.d("ParseGEO", "No agrego imagen");
     						  }
     						
     						
@@ -186,6 +192,10 @@ public class OfertasCercanasFragment extends Fragment
             
             
         }
+		else{
+			Toast.makeText(getActivity().getApplicationContext(), "Ocurrio un problema al detectar la ubicacion actual", Toast.LENGTH_SHORT).show();
+			
+		}
 		
 	}
 
