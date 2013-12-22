@@ -1,35 +1,9 @@
-<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".OfertasCercanasFragment"
-    android:background="@drawable/abs__ab_solid_light_holo" >
-    
-    <fragment 
-		android:id="@+id/mapa"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_margin="10dp"
-		class="com.google.android.gms.maps.SupportMapFragment"
-		 />
-    
-</FrameLayout>-->
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:map="http://schemas.android.com/apk/res-auto"
   android:id="@+id/map"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:layout_margin="10dp"
-  class="com.google.android.gms.maps.SupportMapFragment"
-  map:cameraBearing="112.5"
-  map:cameraTargetLat="19.449229"
-  map:cameraTargetLng="-99.062485"
-  map:cameraTilt="30"
-  map:cameraZoom="20"
-  map:mapType="normal"
-  map:uiCompass="false"
-  map:uiRotateGestures="true"
-  map:uiScrollGestures="false"
-  map:uiTiltGestures="true"
-  map:uiZoomControls="false"
-  map:uiZoomGestures="true"/>
+  map:cameraTargetLat="19.4326058056025"
+  map:cameraTargetLng="-99.13325399999997"
+  map:cameraZoom="11"
+  class="com.google.android.gms.maps.SupportMapFragment"/>
