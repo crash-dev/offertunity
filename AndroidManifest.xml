@@ -36,14 +36,12 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.Offertunittytheme" >
-        
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        
-         <meta-data
+        <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCkcA2MFUBpHWIvXiW23mF068tLG6L64ZM" />
+            android:value="AIzaSyDE38Eh6SYdjc-qxjkBtTXAfQtXi2l6eiU" />
 
         <service
             android:name="com.qualcommlabs.usercontext.service.GimbalService"
@@ -94,13 +92,12 @@
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE" />
-            </intent-filter>
+            </intent-filter>
             -->
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_SHUTDOWN" />
             </intent-filter>
         </receiver>
-        
         <receiver android:name="com.parse.ParseBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -114,11 +111,6 @@
             android:name="com.crash.dev.offertunity.HomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.crash.dev.offertunity.OfertasPorZonaActivity"
@@ -134,6 +126,16 @@
             android:name="com.crash.dev.offertunity.OnlyTestingActivity"
             android:label="@string/title_activity_only_testing"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.crash.dev.offertunity.SplashActivity"
+            android:label="@string/title_activity_splash"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"  >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
